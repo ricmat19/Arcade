@@ -81,11 +81,25 @@ function shuffleNum(randomNumArray){
 
     }
 
-    setMysteryCards(shuffledArray);
+    setCards(shuffledArray)
+
+}
+
+function setCards(shuffledArray){
+
+    for(let i = 0; i < shuffledArray.length; i++){
+
+        cardContainer.innerHTML += "<div class='card'><img class='card-image' src=" + imgCollection[shuffledArray[i]] + "></div>";
+
+    }
+
+    setTimeout(setMysteryCards, 3000, shuffledArray);
 
 }
 
 function setMysteryCards(shuffledArray){
+
+    cardContainer.innerHTML = "";
 
     for(let i = 0; i < shuffledArray.length; i++){
 
@@ -118,34 +132,10 @@ function addCardEvents(cardContainer, shuffledArray){
 
             compareCards(shuffledArray, cardOne, cardTwo)
 
-            resetUnmatchedCards(shuffledArray);
-
         });
 
     }
 
-}
-
-function resetUnmatchedCards(shuffledArray){
-
-    if(selectedCount > 2){
-
-        selectedCount = 0;
-        // cardOne = "";
-        // cardTwo = "";
-
-        for(let j = 0; j < shuffledArray.length; j++){
-
-            if(!cardContainer.childNodes[j].classList.contains('matched')){
-
-                cardContainer.childNodes[j].innerHTML = "<div class='card'><img class='card-image' src='../images/question-solid.svg'></div>";
-
-            }
-
-        }
-
-    }
-    
 }
 
 function compareCards(shuffledArray, cardOne, cardTwo){
@@ -159,9 +149,30 @@ function compareCards(shuffledArray, cardOne, cardTwo){
             }
         }
 
+    }
+
+    if(selectedCount > 1){
+
+        setTimeout(resetUnmatchedCards, 500, shuffledArray);
 
     }
 
+}
+
+function resetUnmatchedCards(shuffledArray){
+
+        selectedCount = 0;
+
+        for(let j = 0; j < shuffledArray.length; j++){
+
+            if(!cardContainer.childNodes[j].classList.contains('matched')){
+
+                cardContainer.childNodes[j].innerHTML = "<div class='card'><img class='card-image' src='../images/question-solid.svg'></div>";
+
+            }
+
+        }
+    
 }
 
 fillRandomNumArray();
