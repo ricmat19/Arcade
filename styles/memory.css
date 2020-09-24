@@ -1,3 +1,11 @@
+.result{
+    text-align: center;
+    font-size: 30px;
+    font-family: Ranchers;
+    letter-spacing: 20px;
+    color: red;
+}
+
 .card-container{
     display: grid;
     grid-template-columns: repeat(8, 160px);

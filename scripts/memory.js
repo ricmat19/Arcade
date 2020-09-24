@@ -1,5 +1,6 @@
 let cardContainer = document.querySelector(".card-container");
 let card = document.querySelectorAll(".card");
+let result = document.querySelector(".result");
 
 let imgCollection = [
                         '../images/1.png',
@@ -112,8 +113,8 @@ function setMysteryCards(shuffledArray){
 }
 
 let selectedCount = 0;
-let cardOne = '';
-let cardTwo = '';
+let cardOne = "";
+let cardTwo = "";
 function addCardEvents(cardContainer, shuffledArray){
 
     for(let i = 0; i < shuffledArray.length; i++){
@@ -138,6 +139,7 @@ function addCardEvents(cardContainer, shuffledArray){
 
 }
 
+let wrong = 0;
 function compareCards(shuffledArray, cardOne, cardTwo){
 
     if(cardOne === cardTwo){
@@ -149,11 +151,37 @@ function compareCards(shuffledArray, cardOne, cardTwo){
             }
         }
 
+    }else{
+
+        console.log(cardTwo)
+
+        if(cardTwo !== ""){
+            wrong++;
+        }
+
     }
 
-    if(selectedCount > 1){
+    console.log(wrong);
 
-        setTimeout(resetUnmatchedCards, 500, shuffledArray);
+    if(wrong < 5){
+
+        if(selectedCount > 1){
+
+            setTimeout(resetUnmatchedCards, 500, shuffledArray);
+
+        }
+
+    }else{
+
+        result.innerHTML = "You Lose!!!";
+
+        cardContainer.innerHTML = "";
+
+        for(let i = 0; i < shuffledArray.length; i++){
+
+            cardContainer.innerHTML += "<div class='card'><img class='card-image' src=" + imgCollection[shuffledArray[i]] + "></div>";
+
+        }
 
     }
 
@@ -162,14 +190,29 @@ function compareCards(shuffledArray, cardOne, cardTwo){
 function resetUnmatchedCards(shuffledArray){
 
         selectedCount = 0;
+        cardOne = "";
+        cardTwo = "";
+        let matchedCards = 0;
 
-        for(let j = 0; j < shuffledArray.length; j++){
+        for(let i = 0; i < shuffledArray.length; i++){
 
-            if(!cardContainer.childNodes[j].classList.contains('matched')){
+            if(!cardContainer.childNodes[i].classList.contains('matched')){
 
-                cardContainer.childNodes[j].innerHTML = "<div class='card'><img class='card-image' src='../images/question-solid.svg'></div>";
+                cardContainer.childNodes[i].innerHTML = "<div class='card'><img class='card-image' src='../images/question-solid.svg'></div>";
 
             }
+
+            if(cardContainer.childNodes[i].classList.contains('matched')){
+
+                matchedCards ++;
+
+            }
+
+        }
+
+        if(matchedCards === 16){
+
+            result.innerHTML = "You Win!!!";
 
         }
     
