@@ -2,128 +2,132 @@ let canvas = document.querySelector("#tetris-canvas");
 let preview = document.querySelector("#preview-canvas");
 let ctx = canvas.getContext("2d");
 let squareSize = 20;
-let gappedSquare = 21;
+let gap = 1;
+let gappedSquare = squareSize + gap;
 let centerX = canvas.width / 2;
 let currentXPosition = 0;
 let currentYPosition = 0;
-let begin = 0;
-let gap = 1;
+let frames = 0;
+let speed = 1;
 
+//Canvas Size
 canvas.width = 300;
 canvas.height = 525;
 
+//Preview Size
 preview.width = 100;
 preview.height = 100;
 
 currentXPosition = centerX;
 
-function runGame(timestamp){
+document.addEventListener("keydown", function moveLeft(){
+    if(event.keyCode === 37){
+        if(currentXPosition > 0 + gappedSquare){
+            currentXPosition -= 3;
+        }
+    }
+});
 
-    // for(let i = 0; i < canvas.height - 7; i++){
+document.addEventListener("keydown", function moveRight(){
+    if(event.keyCode === 39){
+        if(currentXPosition < canvas.width - gappedSquare){
+            currentXPosition += 3;
+        }
+    }
+});
 
-        // if(begin === 0){
-        //     begin = timestamp;
-        // }
+let square = {
+    color: 'red',
+    one: 'ctx.fillRect(currentXPosition - squareSize, currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition + gap, currentYPosition, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition - squareSize, currentYPosition+ gappedSquare, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition + gap, currentYPosition + gappedSquare, squareSize, squareSize)'
+}
 
-        // let elapsed = timestamp - begin;
+let line = {
+    color: 'blue',
+    one: 'ctx.fillRect(currentXPosition - squareSize - squareSize - gap, currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition - squareSize, currentYPosition, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition + gap, currentYPosition, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition + gappedSquare + gap, currentYPosition, squareSize, squareSize)'
+}
 
-        // ctx.clearRect(0, 0, innerWidth, innerHeight);
+let pyramid = {
+    color: 'green',
+    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition + gappedSquare, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition + gappedSquare, squareSize, squareSize)'
+}
+
+let downUp = {
+    color: 'yellow',
+    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition + gappedSquare, squareSize, squareSize)'
+}
+
+let upDown = {
+    color: 'purple',
+    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition + gappedSquare, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition, squareSize, squareSize)'
+}
+
+let r = {
+    color: 'white',
+    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare + gappedSquare, squareSize, squareSize)'
+}
+
+let seven = {
+    color: 'pink',
+    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
+    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition, squareSize, squareSize)',
+    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
+    four: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare + gappedSquare, squareSize, squareSize)'
+}
+
+let shapeArray = [square, line, pyramid, downUp, upDown, r, seven];
+
+let randomShape = Math.floor(Math.random() * shapeArray.length);
+
+function draw(shape){
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         //Square
-        ctx.fillStyle = "red";
+        ctx.fillStyle = shape.color;
         //top left
-        ctx.fillRect(currentXPosition - squareSize, currentYPosition, squareSize, squareSize);
+        eval(shape.one);
         //top right
-        ctx.fillRect(currentXPosition + gap, currentYPosition, squareSize, squareSize);
+        eval(shape.two);
         //bottom left
-        ctx.fillRect(currentXPosition - squareSize, currentYPosition+ gappedSquare, squareSize, squareSize);
+        eval(shape.three);
         //bottom right
-        ctx.fillRect(currentXPosition + gap, currentYPosition + gappedSquare, squareSize, squareSize);
+        eval(shape.four);
 
-        currentYPosition += gappedSquare + gappedSquare;
+        currentYPosition += speed;
 
-        //line
-        ctx.fillStyle = "blue";
-        //square 1
-        ctx.fillRect(currentXPosition - squareSize - squareSize - gap, currentYPosition, squareSize, squareSize);
-        //square 2
-        ctx.fillRect(currentXPosition - squareSize, currentYPosition, squareSize, squareSize);
-        //square 3
-        ctx.fillRect(currentXPosition + gap, currentYPosition, squareSize, squareSize);
-        //square 4
-        ctx.fillRect(currentXPosition + gappedSquare + gap, currentYPosition, squareSize, squareSize);
+}
 
+function runGame(){
 
-        currentYPosition += gappedSquare;
+    // update();
 
-        //pyramid
-        ctx.fillStyle = "green";
-        //top
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize);
-        //bottom 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition + gappedSquare, squareSize, squareSize);
-        //bottom 2
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize);
-        //bottom 3
-        ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition + gappedSquare, squareSize, squareSize);
+    let shape = shapeArray[randomShape];
 
-        currentYPosition += gappedSquare + gappedSquare;
+    draw(shape);
 
-        //down-up
-        ctx.fillStyle = "yellow";
-        //down 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize);
-        //down 2
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition, squareSize, squareSize);
-        //up 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize);
-        //up 2
-        ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition + gappedSquare, squareSize, squareSize);
+    frames++;
 
-        currentYPosition += gappedSquare + gappedSquare;
-
-        //up-down
-        ctx.fillStyle = "purple";
-        //up 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize);
-        //up 2
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition + gappedSquare, squareSize, squareSize);
-        //down 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize);
-        //down 2
-        ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition, squareSize, squareSize);
-
-        currentYPosition += gappedSquare + gappedSquare;
-
-        //r
-        ctx.fillStyle = "white";
-        //top
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize);
-        //top 2
-        ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition, squareSize, squareSize);
-        //bottom 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize);
-        //bottom 2
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare + gappedSquare, squareSize, squareSize);
-
-        currentYPosition += gappedSquare + gappedSquare + gappedSquare;
-
-        //7
-        ctx.fillStyle = "pink";
-        //top
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize);
-        //bottom 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition, squareSize, squareSize);
-        //bottom 1
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize);
-        //bottom 2
-        ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare + gappedSquare, squareSize, squareSize);
-
-        // if (elapsed < 2000) {
-        //     window.requestAnimationFrame(runGame);
-        // }
-
-    // }
+    if(currentYPosition <= (canvas.height - (gappedSquare + gappedSquare - speed))){
+        window.requestAnimationFrame(runGame);
+    }
 
 }
 
