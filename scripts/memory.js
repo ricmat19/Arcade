@@ -167,7 +167,7 @@ function compareCards(shuffledArray, cardOne, cardTwo){
 
         if(selectedCount > 1){
 
-            setTimeout(resetUnmatchedCards, 500, shuffledArray);
+            setTimeout(resetUnmatchedCards, 1000, shuffledArray);
 
         }
 

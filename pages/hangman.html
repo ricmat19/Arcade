@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+    <link type="text/css" rel="stylesheet" href="../styles/hangman.css">
+    <link href="https://fonts.googleapis.com/css?family=Delius+Unicase:700" rel="stylesheet">
+</head>
+<body>
+
+    <div id="lettersGuessedDiv">
+        <p id="lettersGuessed">Guessed: </p>
+    </div>
+
+    <div id = "instructions">
+        <p>Get 6 wrong and you lose.</p>
+        <p id="wrongText">Wrong: 0</p>
+    </div>
+
+    <div id="imgMain">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Hangman-5.svg/2000px-Hangman-5.svg.png">
+
+        <div id = "main">
+            <h1>Hangman</h1>
+            <button>Start Game</button>
+
+            <h2 id="result"></h2>
+            <p id="clue"></p>
+
+            <div id = "guessSet">
+                <p class="guess">Guess a letter:</p>
+                <input type="text" class="guess" maxlength="1">
+            </div>
+        </div>
+        <div id="phrase-div">
+            <p id = "phraseDisplay"></p>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="../scripts/hangman.js"></script>
+</body>
+</html>
