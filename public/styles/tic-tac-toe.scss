@@ -1,0 +1,44 @@
+.game-container{
+    margin: 3px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+button{
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-color: white;
+    border: 10px;
+}
+
+.top-row{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.middle-row{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.bottom-row{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.top-two{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.middle-two{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.bottom-two{
+    margin-left: 5px;
+    margin-right: 5px;
+}
