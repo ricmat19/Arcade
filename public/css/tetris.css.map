@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,iBAAiB,AAAA,CACb,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,uBAAuB,CAC9C,gBAAgB,CAAE,KAAK,CACvB,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,UAAU,CAClB,aAAa,CAAE,IAAI,CACtB,AAUD,AAAA,eAAe,AAAA,CACX,gBAAgB,CAAE,KAAK,CACvB,MAAM,CAAE,GAAG,CACX,aAAa,CAAE,IAAI,CACtB,AAED,AAAA,cAAc,AAAA,CACV,gBAAgB,CAAE,KAAK,CACvB,MAAM,CAAE,GAAG,CACX,aAAa,CAAE,IAAI,CACtB",
+    "sources": [
+        "../styles/tetris.scss"
+    ],
+    "names": [],
+    "file": "tetris.css"
+}

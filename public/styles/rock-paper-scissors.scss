@@ -5,28 +5,28 @@ body{
     background: black;
 }
 
-p button{
+.rps-button{
     font-size: 100px;
     color: white;
     padding: 0 30px;
     text-align: center;
     background: black;
-    margin: 0 10px;
+    margin: 10px;
     border: white solid 2px;
 }
 
 #rock button {
-    background-color: #FF28FF;
+    background-color: #ffb3ff;
     color: black;
 }
 
 #paper button {
-    background-color: #58DE10;
+    background-color: #cbffaf;
     color: black;
 }
 
 #scissors button {
-    background-color: #4258FF;
+    background-color: #b5bdff;
     color: black;
 }
 
@@ -49,12 +49,6 @@ p button{
 button{
     position: relative;
     top: 14px;
-}
-
-h1{
-    margin: 50 0 0 0 ;
-    font-size: 75px;
-    color: white;
 }
 
 h2{

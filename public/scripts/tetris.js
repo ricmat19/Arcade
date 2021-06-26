@@ -12,7 +12,7 @@ let speed = 1;
 
 //Canvas Size
 canvas.width = 300;
-canvas.height = 525;
+canvas.height = 480;
 
 //Preview Size
 preview.width = 100;

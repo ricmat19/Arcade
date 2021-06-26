@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../styles/tic-tac-toe.scss"
+    ],
+    "names": [],
+    "file": "tic-tac-toe.css"
+}
