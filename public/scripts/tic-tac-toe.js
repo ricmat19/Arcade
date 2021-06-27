@@ -9,26 +9,79 @@ let bottomTwo = document.querySelector(".bottom-two");
 let bottomThree = document.querySelector(".bottom-three");
 
 let move = "X";
-let went = false;
+let game = active;
 
-topOne.addEventListener("click", play);
-topTwo.addEventListener("click", play);
-topThree.addEventListener("click", play);
-middleOne.addEventListener("click", play);
-middleTwo.addEventListener("click", play);
-middleThree.addEventListener("click", play);
-bottomOne.addEventListener("click", play);
-bottomTwo.addEventListener("click", play);
-bottomThree.addEventListener("click", play);
-
-function play(move, went){
-    if (went = true){
+function play(){
+    if(move === "X"){
         move = "O";
-        went = false;
     }else{
         move = "X";
-        went = true;
-        console.log("X");
     }
-    
 }
+
+function gameStatus(){
+    if(topOne.textContent === topTwo.textContent === topThree.textContent && topOne.textContent !== ""){
+
+    }else if(middleOne.textContent === middleTwo.textContent === middleThree.textContent && middleOne.textContent !== ""){
+
+    }else if(bottomOne.textContent === bottomTwo.textContent === bottomThree.textContent && bottomOne.textContent !== ""){
+
+    }else if(topOne.textContent === middleOne.textContent === bottomOne.textContent && topOne.textContent !== ""){
+
+    }else if(topTwo.textContent === middleTwo.textContent === bottomThree.textContent && topTwo.textContent !== ""){
+
+    }else if(topThree.textContent === middleThree.textContent === bottomThree.textContent && topThree.textContent !== ""){
+
+    }else if(topOne.textContent === middleTwo.textContent === bottomThree.textContent && topOne.textContent !== ""){
+
+    }else if(topThree.textContent === middleTwo.textContent === bottomOne.textContent && topThree.textContent !== ""){
+
+    }else if(topOne.textContent !== "" && topTwo.textContent !== "" && topThree.textContent !== "" && middleOne.textContent !== "" && middleTwo.textContent !== "" && middleThree.textContent !== "" && bottomOne.textContent !== "" && bottomTwo.textContent !== "" && bottomThree.textContent !== ""){
+
+    }
+}
+
+topOne.addEventListener("click", function(){
+    topOne.textContent = move;
+    play();
+});
+
+topTwo.addEventListener("click", function(){
+    topTwo.textContent = move;
+    play();
+});
+
+topThree.addEventListener("click", function(){
+    topThree.textContent = move;
+    play();
+});
+
+middleOne.addEventListener("click", function(){
+    middleOne.textContent = move;
+    play();
+});
+
+middleTwo.addEventListener("click", function(){
+    middleTwo.textContent = move;
+    play();
+});
+
+middleThree.addEventListener("click", function(){
+    middleThree.textContent = move;
+    play();
+});
+
+bottomOne.addEventListener("click", function(){
+    bottomOne.textContent = move;
+    play();
+});
+
+bottomTwo.addEventListener("click", function(){
+    bottomTwo.textContent = move;
+    play();
+});
+
+bottomThree.addEventListener("click", function(){
+    bottomThree.textContent = move;
+    play();
+});
