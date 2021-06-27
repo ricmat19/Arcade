@@ -1,6 +1,6 @@
 let cardContainer = document.querySelector(".card-container");
 let card = document.querySelectorAll(".card");
-let result = document.querySelector(".result");
+let result = document.querySelector(".result-div");
 
 let imgCollection = [
                         '../images/1.png',
@@ -153,15 +153,11 @@ function compareCards(shuffledArray, cardOne, cardTwo){
 
     }else{
 
-        console.log(cardTwo)
-
         if(cardTwo !== ""){
             wrong++;
         }
 
     }
-
-    console.log(wrong);
 
     if(wrong < 5){
 
@@ -173,7 +169,7 @@ function compareCards(shuffledArray, cardOne, cardTwo){
 
     }else{
 
-        result.innerHTML = "You Lose!!!";
+        result.innerHTML = "<h2>You Lose!!!</h2>";
 
         cardContainer.innerHTML = "";
 
@@ -212,7 +208,7 @@ function resetUnmatchedCards(shuffledArray){
 
         if(matchedCards === 16){
 
-            result.innerHTML = "You Win!!!";
+            result.innerHTML = "<h2>You Win!!!<h2>";
 
         }
     
