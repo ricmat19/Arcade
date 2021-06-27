@@ -62,7 +62,7 @@ function gameResult(){
 
 topOne.addEventListener("click", function(){
     if(gameActive && topOne.textContent === ""){
-        topOne.textContent = move;
+        topOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -71,7 +71,7 @@ topOne.addEventListener("click", function(){
 
 topTwo.addEventListener("click", function(){
     if(gameActive && topTwo.textContent === ""){
-        topTwo.textContent = move;
+        topTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -80,7 +80,7 @@ topTwo.addEventListener("click", function(){
 
 topThree.addEventListener("click", function(){
     if(gameActive && topThree.textContent === ""){
-        topThree.textContent = move;
+        topThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -89,7 +89,7 @@ topThree.addEventListener("click", function(){
 
 middleOne.addEventListener("click", function(){
     if(gameActive && middleOne.textContent === ""){
-        middleOne.textContent = move;
+        middleOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -98,7 +98,7 @@ middleOne.addEventListener("click", function(){
 
 middleTwo.addEventListener("click", function(){
     if(gameActive && middleTwo.textContent === ""){
-        middleTwo.textContent = move;
+        middleTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -107,7 +107,7 @@ middleTwo.addEventListener("click", function(){
 
 middleThree.addEventListener("click", function(){
     if(gameActive && middleThree.textContent === ""){
-        middleThree.textContent = move;
+        middleThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -116,7 +116,7 @@ middleThree.addEventListener("click", function(){
 
 bottomOne.addEventListener("click", function(){
     if(gameActive && bottomOne.textContent === ""){
-        bottomOne.textContent = move;
+        bottomOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -125,7 +125,7 @@ bottomOne.addEventListener("click", function(){
 
 bottomTwo.addEventListener("click", function(){
     if(gameActive && bottomTwo.textContent === ""){
-        bottomTwo.textContent = move;
+        bottomTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
@@ -134,7 +134,7 @@ bottomTwo.addEventListener("click", function(){
 
 bottomThree.addEventListener("click", function(){
     if(gameActive && bottomThree.textContent === ""){
-        bottomThree.textContent = move;
+        bottomThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
         gameStatus();
         play();
         console.log(gameActive + "/" + result);
