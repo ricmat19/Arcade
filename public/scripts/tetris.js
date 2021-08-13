@@ -1,134 +1,161 @@
 let canvas = document.querySelector("#tetris-canvas");
-let preview = document.querySelector("#preview-canvas");
 let ctx = canvas.getContext("2d");
-let squareSize = 20;
-let gap = 1;
-let gappedSquare = squareSize + gap;
-let centerX = canvas.width / 2;
-let currentXPosition = 0;
-let currentYPosition = 0;
-let frames = 0;
-let speed = 1;
+let gameBoardHeight = 20;
+let gameBoardWidth = 12;
+let startX = 4;
+let startY = 0;
+let score = 0;
+let level = 1;
+let winOrLose = "Playing"
+let stoppedShapeArray = [...Array(gameBoardHeight).map(e => Array(gameBoardWidth).fill())];
+let gameBoardArray = [...Array(gameBoardHeight).map(e => Array(gameBoardWidth).fill())]
+let currentTetromino =[[1,0], [0,1], [1,1], [2,1]];
+let tetrominos  = [];
+let tetrominoColors = ['red', 'green', 'yellow', 'purple', 'blue', 'pink', 'orange'];
+let currentTetrominoColor = "";
+let DIRECTION = {
+    IDLE: 0,
+    DOWN: 1,
+    LEFT: 2,
+    RIGHT: 3
+};
+let direction;
 
-//Canvas Size
-canvas.width = 300;
-canvas.height = 480;
+class Coordinates{
+    constructor(x,y){
+        this.x = x;
+        this.y = y;
+    }
+}
 
-//Preview Size
-preview.width = 100;
-preview.height = 100;
+document.addEventListener('DOMContentLoaded', SetupCanvas);
 
-currentXPosition = centerX;
+function CreateCoordinateArray(){
+    let i = 0;
+    let j = 0;
 
-document.addEventListener("keydown", function moveLeft(){
-    if(event.keyCode === 37){
-        if(currentXPosition > 0 + gappedSquare){
-            currentXPosition -= 3;
+    for(let y = 9; y <= 446; y += 23){
+        for (let x = 11; x <=264; x += 23){
+            coordinateArray[i][j] = new Coordinates(x, y);
+            i++;
+        }
+        j++;
+        i=0;
+    }
+}
+
+function SetupCanvas(){
+    canvas = document.querySelector("#tetris-canvas");
+    ctx = canvas.getContext('2d');
+
+    canvas.width = 936;
+    canvas.height = 956;
+
+    ctx.scale(2,2);
+
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = 'black';
+    ctx.strokeRect(8, 8, 280, 462);
+
+    ctx.fillStyle = 'black';
+    ctx.font = '21px Arial';
+    ctx.fillText("SCORE", 300, 98);
+
+    ctx.strokeRect(300, 107, 161, 24);
+    ctx.fillText(score.toString(), 310, 127);
+
+    ctx.fillText("LEVEL", 300, 157);
+    ctx.strokeRect(300, 171, 161, 24);
+    ctx.fillText(level.toString(), 310, 190)
+
+    ctx.fillText("WIN / LOSE", 300, 221);
+    ctx.fillText(winOrLose, 310, 261);
+    ctx.strokeRect(300, 232, 161, 95)
+
+    document.addEventListener('keydown', HandleKeyPress);
+    CreateTetrominos();
+    CreateTetromino();
+
+    CreateCoordinateArray();
+    DrawTetromino();
+}
+
+function DrawTetromino(){
+    for(let i = 0; i < currentTetromino.length; i++){
+        let x = currentTetromino[i][0] + startX;
+        let y = currentTetromino[i][1] + startY;
+        gameBoardArray[x, y] = 1;
+        let coordinateX = coordinateArray[x][y].x;
+        let coordinateY = coordinateArray[x][y].y;
+        ctx.fillStyle = currentTetrominoColor;
+        ctx.fillRect = (coordinateX, coordinateY, 21, 21);
+    }
+}
+
+function HandleKeyPress(key){
+    if(key.keyCode === 65){
+        direction = DIRECTION.LEFT;
+        if(!HittingWall()){
+            DeleteTetromino();
+            startX--;
+            DrawTetromino();
+        }
+    }else if(key.keyCode === 68){
+        direction = DIRECTION.RIGHT;
+        if(!HittingWall()){
+            DeleteTetromino();
+            startX++;
+            DrawTetromino();
+        }
+    }else if(key.keyCode === 83){
+        direction = DIRECTION.DOWN;
+        if(!HittingWall()){
+            DeleteTetromino();
+            startY++;
+            DrawTetromino();
         }
     }
-});
+}
 
-document.addEventListener("keydown", function moveRight(){
-    if(event.keyCode === 39){
-        if(currentXPosition < canvas.width - gappedSquare){
-            currentXPosition += 3;
+function DeleteTetromino(){
+    for(let i = 0; i < currentTetromino.length; i++){
+        let x = currentTetromino[i][0] + startX;
+        let y = currentTetromino[i][1] + startY;
+        gameBoardArray[x][y] = 0;
+        let coordinateX = coordinateArray[x][y].x;
+        let coordinateY = coordinateArray[x][y].y;
+        ctx.fillStyle = 'white';
+        ctx.fillRect = (coordinateX, coordinateY, 21, 21);
+    }
+}
+
+function CreateTetrominos(){
+    tetrominos.push([[1, 0], [0, 1], [1, 1], [2,1]]);
+    tetrominos.push([[0, 0], [1, 0], [2, 0], [3,0]]);
+    tetrominos.push([[0, 0], [0, 1], [1, 1], [2,1]]);
+    tetrominos.push([[0, 0], [1, 0], [0, 1], [1,1]]);
+    tetrominos.push([[2, 0], [0, 1], [1, 1], [2,1]]);
+    tetrominos.push([[1, 0], [2, 0], [0, 1], [1,1]]);
+    tetrominos.push([[0, 0], [1, 0], [1, 1], [2,1]]);
+}
+
+function CreateTetromino(){
+    let randomTetromino = Math.floor(Math.random() * tetrominos.length);
+    currentTetromino = tetrominos[randomTetromino];
+    currentTetrominoColor = tetrominoColors[randomTetromino]
+}
+
+function HittingWall(){
+    for(let i = 0; i < currentTetromino.length; i++){
+        let newX = currentTetromino[i][0] + startX;
+        if(newX <= 0 && direction === DIRECTION.LEFT){
+            return true;
+        }else if(newX >= 11 && direction === DIRECTION.RIGHT){
+            return true;
         }
     }
-});
 
-let square = {
-    color: 'red',
-    one: 'ctx.fillRect(currentXPosition - squareSize, currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition + gap, currentYPosition, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition - squareSize, currentYPosition+ gappedSquare, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition + gap, currentYPosition + gappedSquare, squareSize, squareSize)'
+    return false;
 }
-
-let line = {
-    color: 'blue',
-    one: 'ctx.fillRect(currentXPosition - squareSize - squareSize - gap, currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition - squareSize, currentYPosition, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition + gap, currentYPosition, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition + gappedSquare + gap, currentYPosition, squareSize, squareSize)'
-}
-
-let pyramid = {
-    color: 'green',
-    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition + gappedSquare, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition + gappedSquare, squareSize, squareSize)'
-}
-
-let downUp = {
-    color: 'yellow',
-    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition + gappedSquare, squareSize, squareSize)'
-}
-
-let upDown = {
-    color: 'purple',
-    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition + gappedSquare, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition, squareSize, squareSize)'
-}
-
-let r = {
-    color: 'white',
-    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition + ((squareSize + gap) / 2) + gap, currentYPosition, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare + gappedSquare, squareSize, squareSize)'
-}
-
-let seven = {
-    color: 'pink',
-    one: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition, squareSize, squareSize)',
-    two: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2) - squareSize - gap, currentYPosition, squareSize, squareSize)',
-    three: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare, squareSize, squareSize)',
-    four: 'ctx.fillRect(currentXPosition - ((squareSize - gap) / 2), currentYPosition + gappedSquare + gappedSquare, squareSize, squareSize)'
-}
-
-let shapeArray = [square, line, pyramid, downUp, upDown, r, seven];
-
-let randomShape = Math.floor(Math.random() * shapeArray.length);
-
-function draw(shape){
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        //Square
-        ctx.fillStyle = shape.color;
-        //top left
-        eval(shape.one);
-        //top right
-        eval(shape.two);
-        //bottom left
-        eval(shape.three);
-        //bottom right
-        eval(shape.four);
-
-        currentYPosition += speed;
-
-}
-
-function runGame(){
-
-    // update();
-
-    let shape = shapeArray[randomShape];
-
-    draw(shape);
-
-    frames++;
-
-    if(currentYPosition <= (canvas.height - (gappedSquare + gappedSquare - speed))){
-        window.requestAnimationFrame(runGame);
-    }
-
-}
-
-runGame();
