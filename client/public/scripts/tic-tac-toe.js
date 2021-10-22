@@ -13,130 +13,172 @@ let move = "X";
 let gameActive = true;
 let result = "";
 
-function play(){
-    if(move === "X"){
-        move = "O";
-    }else{
-        move = "X";
-    }
+function play() {
+  if (move === "X") {
+    move = "O";
+  } else {
+    move = "X";
+  }
 }
 
-function gameStatus(){
-    if(topOne.textContent === topTwo.textContent && topTwo.textContent === topThree.textContent && topOne.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(middleOne.textContent === middleTwo.textContent && middleTwo.textContent === middleThree.textContent && middleOne.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(bottomOne.textContent === bottomTwo.textContent && bottomTwo.textContent === bottomThree.textContent && bottomOne.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(topOne.textContent === middleOne.textContent && middleOne.textContent === bottomOne.textContent && topOne.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(topTwo.textContent === middleTwo.textContent && middleTwo.textContent === bottomTwo.textContent && topTwo.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(topThree.textContent === middleThree.textContent && middleThree.textContent === bottomThree.textContent && topThree.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(topOne.textContent === middleTwo.textContent && middleTwo.textContent === bottomThree.textContent && topOne.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(topThree.textContent === middleTwo.textContent && middleTwo.textContent === bottomOne.textContent && topThree.textContent !== ""){
-        gameActive = false;
-        result = move + " Wins";
-    }else if(topOne.textContent !== "" && topTwo.textContent !== "" && topThree.textContent !== "" && middleOne.textContent !== "" && middleTwo.textContent !== "" && middleThree.textContent !== "" && bottomOne.textContent !== "" && bottomTwo.textContent !== "" && bottomThree.textContent !== ""){
-        gameActive = false;
-        result = "Tie!!!";
-    }
+function gameStatus() {
+  if (
+    topOne.textContent === topTwo.textContent &&
+    topTwo.textContent === topThree.textContent &&
+    topOne.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    middleOne.textContent === middleTwo.textContent &&
+    middleTwo.textContent === middleThree.textContent &&
+    middleOne.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    bottomOne.textContent === bottomTwo.textContent &&
+    bottomTwo.textContent === bottomThree.textContent &&
+    bottomOne.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    topOne.textContent === middleOne.textContent &&
+    middleOne.textContent === bottomOne.textContent &&
+    topOne.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    topTwo.textContent === middleTwo.textContent &&
+    middleTwo.textContent === bottomTwo.textContent &&
+    topTwo.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    topThree.textContent === middleThree.textContent &&
+    middleThree.textContent === bottomThree.textContent &&
+    topThree.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    topOne.textContent === middleTwo.textContent &&
+    middleTwo.textContent === bottomThree.textContent &&
+    topOne.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    topThree.textContent === middleTwo.textContent &&
+    middleTwo.textContent === bottomOne.textContent &&
+    topThree.textContent !== ""
+  ) {
+    gameActive = false;
+    result = move + " Wins";
+  } else if (
+    topOne.textContent !== "" &&
+    topTwo.textContent !== "" &&
+    topThree.textContent !== "" &&
+    middleOne.textContent !== "" &&
+    middleTwo.textContent !== "" &&
+    middleThree.textContent !== "" &&
+    bottomOne.textContent !== "" &&
+    bottomTwo.textContent !== "" &&
+    bottomThree.textContent !== ""
+  ) {
+    gameActive = false;
+    result = "Tie!!!";
+  }
 
-    if(!gameActive){
-        gameResult();
-    }
+  if (!gameActive) {
+    gameResult();
+  }
 }
 
-function gameResult(){
-    resultTitle.innerHTML = "<h2>" + result + "</h2>";
+function gameResult() {
+  resultTitle.innerHTML = "<h2>" + result + "</h2>";
 }
 
-topOne.addEventListener("click", function(){
-    if(gameActive && topOne.textContent === ""){
-        topOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+topOne.addEventListener("click", function () {
+  if (gameActive && topOne.textContent === "") {
+    topOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-topTwo.addEventListener("click", function(){
-    if(gameActive && topTwo.textContent === ""){
-        topTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+topTwo.addEventListener("click", function () {
+  if (gameActive && topTwo.textContent === "") {
+    topTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-topThree.addEventListener("click", function(){
-    if(gameActive && topThree.textContent === ""){
-        topThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+topThree.addEventListener("click", function () {
+  if (gameActive && topThree.textContent === "") {
+    topThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-middleOne.addEventListener("click", function(){
-    if(gameActive && middleOne.textContent === ""){
-        middleOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+middleOne.addEventListener("click", function () {
+  if (gameActive && middleOne.textContent === "") {
+    middleOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-middleTwo.addEventListener("click", function(){
-    if(gameActive && middleTwo.textContent === ""){
-        middleTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+middleTwo.addEventListener("click", function () {
+  if (gameActive && middleTwo.textContent === "") {
+    middleTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-middleThree.addEventListener("click", function(){
-    if(gameActive && middleThree.textContent === ""){
-        middleThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+middleThree.addEventListener("click", function () {
+  if (gameActive && middleThree.textContent === "") {
+    middleThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-bottomOne.addEventListener("click", function(){
-    if(gameActive && bottomOne.textContent === ""){
-        bottomOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+bottomOne.addEventListener("click", function () {
+  if (gameActive && bottomOne.textContent === "") {
+    bottomOne.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-bottomTwo.addEventListener("click", function(){
-    if(gameActive && bottomTwo.textContent === ""){
-        bottomTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+bottomTwo.addEventListener("click", function () {
+  if (gameActive && bottomTwo.textContent === "") {
+    bottomTwo.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });
 
-bottomThree.addEventListener("click", function(){
-    if(gameActive && bottomThree.textContent === ""){
-        bottomThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
-        gameStatus();
-        play();
-        console.log(gameActive + "/" + result);
-    }
+bottomThree.addEventListener("click", function () {
+  if (gameActive && bottomThree.textContent === "") {
+    bottomThree.innerHTML = "<h2 class='value'>" + move + "</h2>";
+    gameStatus();
+    play();
+    console.log(gameActive + "/" + result);
+  }
 });

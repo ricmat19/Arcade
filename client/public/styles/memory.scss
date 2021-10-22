@@ -1,21 +1,21 @@
-.card{
-    cursor: pointer;
+.card {
+  cursor: pointer;
 }
 
-.card-container{
-    display: grid;
-    grid-template-columns: repeat(8, 160px);
-    gap: 10px;
-    margin-top: 20px;
-    justify-content: center;
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(8, 160px);
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
 }
 
-.card-image{
-    width: 150px;
-    height: 200px;
-    border: black solid 5px;
-    border-radius: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #444444;
+.card-image {
+  width: 150px;
+  height: 200px;
+  border: black solid 5px;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #444444;
 }

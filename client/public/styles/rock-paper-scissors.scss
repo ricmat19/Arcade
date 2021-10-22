@@ -1,64 +1,61 @@
-
-body{
-    text-align: center;
-    margin: 0;
-    background: black;
+body {
+  text-align: center;
+  margin: 0;
+  background: black;
 }
 
-.rps-button{
-    font-size: 100px;
-    color: white;
-    padding: 0 30px;
-    text-align: center;
-    background: black;
-    margin: 10px;
-    border: white solid 2px;
+.rps-button {
+  font-size: 100px;
+  color: white;
+  padding: 0 30px;
+  text-align: center;
+  background: black;
+  margin: 10px;
+  border: white solid 2px;
 }
 
 #rock button {
-    background-color: #ffb3ff;
-    color: black;
+  background-color: #ffb3ff;
+  color: black;
 }
 
 #paper button {
-    background-color: #cbffaf;
-    color: black;
+  background-color: #cbffaf;
+  color: black;
 }
 
 #scissors button {
-    background-color: #b5bdff;
-    color: black;
+  background-color: #b5bdff;
+  color: black;
 }
 
-#hands p{
-    display: inline-block;
+#hands p {
+  display: inline-block;
 }
 
-#hands{
-    text-align: center;
+#hands {
+  text-align: center;
 }
 
-#game-buttons{
-    text-align: center;
-    margin: 0 0 0 0;
-    padding: 0;
-    background-color: #1F479D;
-    height: 50px;
+#game-buttons {
+  text-align: center;
+  margin: 0 0 0 0;
+  padding: 0;
+  background-color: #1f479d;
+  height: 50px;
 }
 
-button{
-    position: relative;
-    top: 14px;
+button {
+  position: relative;
+  top: 14px;
 }
 
-#result{
-    margin-top: 50px;
+#result {
+  margin-top: 50px;
 }
 
-#random-hand-picked{
-    font-size: 100px;
-    margin: 50px 0;
-    color: white;
+#random-hand-picked {
+  font-size: 100px;
+  margin: 50px 0;
+  color: white;
 }
-
-
