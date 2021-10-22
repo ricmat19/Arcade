@@ -24,8 +24,7 @@ let imgCollection = [
                         '../images/19.png',
                         '../images/20.png',
                         '../images/21.png',
-                        '../images/22.png',
-                        '../images/23.png'
+                        '../images/22.png'
                     ];
  
 function fillRandomNumArray(){
@@ -41,7 +40,7 @@ function fillRandomNumArray(){
         duplicate = false;
 
         //pick a random number
-        random = Math.ceil(Math.random() * 22);
+        random = Math.ceil(Math.random() * 21);
 
         //check if the random number already exists in the array
         for(let j = 0; j < 16; j++){
