@@ -1,6 +1,7 @@
 //requires the express framework for this file
 const express = require("express");
 const cors = require("cors");
+const hb = require('express-handlebars');
 //creates a variable to hold the express framework
 const app = express();
 
@@ -18,24 +19,51 @@ app.use(express.urlencoded({ extended: false }));
 
 require("dotenv").config();
 
-//uses the Express use() method
-//the use() method is used to implement middleware on the server
-//middleware used to give the server access to programs front-end files
+app.engine('handlebars', hb());
+app.set('view engine', 'handlebars');
+app.set('views', './views')
+
 app.use(express.static("public"));
 
-//Serve static assets if in production
-if (process.env.NODE_ENV === "production") {
-
-  app.use(express.static("client"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "views/layouts", "main.handlebars"));
-  });
-  
-}
-
-//uses the Express listen() method
-//the listen() is used to run the server on the specified port
-app.listen(process.env.PORT, () => {
-  console.log(`Server Running on port: ${process.env.PORT}`);
+app.get('/', (req, res) => {
+  res.render('home');
 });
+
+app.get('/hangman', (req, res) => {
+  res.render('hangman', 
+  {title: "Hangman",
+  css: "css/hangman.css",
+  js: "scripts/hangman.js"}); 
+})
+
+app.get('/memory', (req, res) => {
+  res.render('memory', 
+  {title: "Memory",
+  css: "css/memory.css",
+  js: "scripts/memory.js"});
+})
+
+app.get('/rock-paper-scissors', (req, res) => {
+  res.render('rock-paper-scissors', 
+  {title: "Rock-Paper-Scissors",
+  css: "css/rock-paper-scissors.css",
+  js: "scripts/rock-paper-scissors.js"});
+})
+
+app.get('/tetris', (req, res) => {
+  res.render('tetris', 
+  {title: "Tetris",
+  css: "css/tetris.css",
+  js: "scripts/tetris.js"});
+})
+
+app.get('/tic-tac-toe', (req, res) => {
+  res.render('tic-tac-toe', 
+  {title: "Tic-Tac-Toe",
+  css: "css/tic-tac-toe.css",
+  js: "scripts/tic-tac-toe.js"});
+})
+
+app.listen(process.env.PORT, () => {
+  console.log('Server is starting at port: ' + process.env.PORT);
+})
