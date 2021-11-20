@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const hb = require('express-handlebars');
 
+require("dotenv").config();
+
 app.use(express.static('public'));
 
 app.engine('handlebars', hb());
@@ -42,6 +44,6 @@ app.get('/tic-tac-toe', (req, res) => {
     js: "scripts/tic-tac-toe.js"});
 })
 
-app.listen(8080, () => {
-    console.log('Server is starting at port', 8080);
+app.listen(process.env.PORT, () => {
+    console.log('Server is starting at port', process.env.PORT);
 })
