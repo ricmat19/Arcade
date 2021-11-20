@@ -8,7 +8,11 @@ const app = express();
 app.use(express.json());
 
 //allows for different domains to communicate
-app.use(cors());
+app.use(
+  cors({
+    origin: [process.env.ORIGIN, process.env.ARCADE_API]
+  })
+);
 
 app.use(express.urlencoded({ extended: false }));
 
