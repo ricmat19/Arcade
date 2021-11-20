@@ -2,28 +2,28 @@ let cardContainer = document.querySelector(".card-container");
 let result = document.querySelector(".result-div");
 
 let imgCollection = [
-  "../images/1.png",
-  "../images/2.png",
-  "../images/3.png",
-  "../images/4.png",
-  "../images/5.png",
-  "../images/6.png",
-  "../images/7.png",
-  "../images/8.png",
-  "../images/9.png",
-  "../images/10.png",
-  "../images/11.png",
-  "../images/12.png",
-  "../images/13.png",
-  "../images/14.png",
-  "../images/15.png",
-  "../images/16.png",
-  "../images/17.png",
-  "../images/18.png",
-  "../images/19.png",
-  "../images/20.png",
-  "../images/21.png",
-  "../images/22.png",
+  "<div class='card'><img class='card-image' src='../images/1.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/2.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/3.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/4.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/5.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/6.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/7.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/8.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/9.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/10.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/11.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/12.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/13.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/14.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/15.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/16.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/17.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/18.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/19.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/20.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/21.png'></div>",
+  "<div class='card'><img class='card-image' src='../images/22.png'></div>",
 ];
 
 function fillRandomNumArray() {
@@ -75,10 +75,7 @@ function shuffleNum(randomNumArray) {
 
 function setCards(shuffledArray) {
   for (let i = 0; i < shuffledArray.length; i++) {
-    cardContainer.innerHTML +=
-      "<div class='card'><img class='card-image' src=" +
-      imgCollection[shuffledArray[i]] +
-      "></div>";
+    cardContainer.innerHTML += imgCollection[shuffledArray[i]];
   }
 
   setTimeout(setMysteryCards, 3000, shuffledArray);
@@ -101,10 +98,7 @@ let cardTwo = "";
 function addCardEvents(cardContainer, shuffledArray) {
   for (let i = 0; i < shuffledArray.length; i++) {
     cardContainer.childNodes[i].addEventListener("click", function () {
-      cardContainer.childNodes[i].innerHTML =
-        "<div class='card'><img class='card-image' src=" +
-        imgCollection[shuffledArray[i]] +
-        "></div>";
+      cardContainer.childNodes[i].innerHTML = imgCollection[shuffledArray[i]];
 
       selectedCount++;
 
@@ -143,10 +137,7 @@ function compareCards(shuffledArray, cardOne, cardTwo) {
     cardContainer.innerHTML = "";
 
     for (let i = 0; i < shuffledArray.length; i++) {
-      cardContainer.innerHTML +=
-        "<div class='card'><img class='card-image' src=" +
-        imgCollection[shuffledArray[i]] +
-        "></div>";
+      cardContainer.innerHTML += imgCollection[shuffledArray[i]];
     }
   }
 }
@@ -160,7 +151,7 @@ function resetUnmatchedCards(shuffledArray) {
   for (let i = 0; i < shuffledArray.length; i++) {
     if (!cardContainer.childNodes[i].classList.contains("matched")) {
       cardContainer.childNodes[i].innerHTML =
-        "<div class='card'><img class='card-image' src='../images/19.PNG'></div>";
+        "<div class='card'><img class='card-image' src='../images/question-solid.svg'></div>";
     }
 
     if (cardContainer.childNodes[i].classList.contains("matched")) {
@@ -174,3 +165,92 @@ function resetUnmatchedCards(shuffledArray) {
 }
 
 fillRandomNumArray();
+
+// let imgCollection = [
+//   "../images/1.png",
+//   "../images/2.png",
+//   "../images/3.png",
+//   "../images/4.png",
+//   "../images/5.png",
+//   "../images/6.png",
+//   "../images/7.png",
+//   "../images/8.png",
+//   "../images/9.png",
+//   "../images/10.png",
+//   "../images/11.png",
+//   "../images/12.png",
+//   "../images/13.png",
+//   "../images/14.png",
+//   "../images/15.png",
+//   "../images/16.png",
+//   "../images/17.png",
+//   "../images/18.png",
+//   "../images/19.png",
+//   "../images/20.png",
+//   "../images/21.png",
+//   "../images/22.png",
+// ];
+
+
+// function setCards(shuffledArray) {
+//   for (let i = 0; i < shuffledArray.length; i++) {
+//     cardContainer.innerHTML +=
+//       "<div class='card'><img class='card-image' src=" +
+//       imgCollection[shuffledArray[i]] +
+//       "></div>";
+//   }
+
+//   setTimeout(setMysteryCards, 3000, shuffledArray);
+// }
+
+// function addCardEvents(cardContainer, shuffledArray) {
+//   for (let i = 0; i < shuffledArray.length; i++) {
+//     cardContainer.childNodes[i].addEventListener("click", function () {
+//       cardContainer.childNodes[i].innerHTML =
+//         "<div class='card'><img class='card-image' src=" +
+//         imgCollection[shuffledArray[i]] +
+//         "></div>";
+
+//       selectedCount++;
+
+//       if (selectedCount === 1) {
+//         cardOne = imgCollection[shuffledArray[i]];
+//       } else if (selectedCount === 2) {
+//         cardTwo = imgCollection[shuffledArray[i]];
+//       }
+
+//       compareCards(shuffledArray, cardOne, cardTwo);
+//     });
+//   }
+// }
+
+// function compareCards(shuffledArray, cardOne, cardTwo) {
+//   if (cardOne === cardTwo) {
+//     for (let i = 0; i < shuffledArray.length; i++) {
+//       if (cardContainer.childNodes[i].innerHTML.indexOf(cardOne) !== -1) {
+//         cardContainer.childNodes[i].classList.add("matched");
+//       }
+//     }
+//   } else {
+//     if (cardTwo !== "") {
+//       wrong++;
+//     }
+//   }
+
+//   if (wrong < 5) {
+//     if (selectedCount > 1) {
+//       setTimeout(resetUnmatchedCards, 1000, shuffledArray);
+//     }
+//   } else {
+//     result.innerHTML = "<h2>You Lose!!!</h2>";
+
+//     cardContainer.innerHTML = "";
+
+//     for (let i = 0; i < shuffledArray.length; i++) {
+//       cardContainer.innerHTML +=
+//         "<div class='card'><img class='card-image' src=" +
+//         imgCollection[shuffledArray[i]] +
+//         "></div>";
+//     }
+//   }
+// }
