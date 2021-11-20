@@ -160,7 +160,7 @@ function resetUnmatchedCards(shuffledArray) {
   for (let i = 0; i < shuffledArray.length; i++) {
     if (!cardContainer.childNodes[i].classList.contains("matched")) {
       cardContainer.childNodes[i].innerHTML =
-        "<div class='card'><img class='card-image' src='../images/question-solid.svg'></div>";
+        "<div class='card'><img class='card-image' src='../images/19.PNG'></div>";
     }
 
     if (cardContainer.childNodes[i].classList.contains("matched")) {
