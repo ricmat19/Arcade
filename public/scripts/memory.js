@@ -1,6 +1,5 @@
 let cardContainer = document.querySelector(".card-container");
 let result = document.querySelector(".result-div");
-let image = document.querySelector("../images/1.png");
 
 let imgCollection = [
   "../images/1.png",
