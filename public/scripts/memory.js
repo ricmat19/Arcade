@@ -1,5 +1,6 @@
 let cardContainer = document.querySelector(".card-container");
 let result = document.querySelector(".result-div");
+let image = document.querySelector("../images/1.png");
 
 let imgCollection = [
   "../images/1.png",
@@ -77,7 +78,8 @@ function setCards(shuffledArray) {
   for (let i = 0; i < shuffledArray.length; i++) {
     cardContainer.innerHTML +=
       "<div class='card'><img class='card-image' src=" +
-      imgCollection[shuffledArray[i]] +
+      // imgCollection[shuffledArray[i]] +
+      image +
       "></div>";
   }
 
