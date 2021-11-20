@@ -78,8 +78,7 @@ function setCards(shuffledArray) {
   for (let i = 0; i < shuffledArray.length; i++) {
     cardContainer.innerHTML +=
       "<div class='card'><img class='card-image' src=" +
-      // imgCollection[shuffledArray[i]] +
-      image +
+      imgCollection[shuffledArray[i]] +
       "></div>";
   }
 
