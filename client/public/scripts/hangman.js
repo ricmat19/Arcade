@@ -28,25 +28,31 @@ button.addEventListener("click", function () {
   for (var i = 0; i < phrase.length; i++) {
     phraseLetters.push(phrase.charAt(i));
     if (phraseLetters[i] == " ") {
-      phraseLine.push(" - ");
+      phraseLine.push(" ");
     } else {
-      phraseLine.push(" _ ");
+      phraseLine.push("_");
     }
     phraseDisplay.textContent = phraseLine.join("");
+    console.log(phraseDisplay.textContent);
   }
 });
 
 letterGuess.addEventListener("keypress", function (event) {
   if (event.keyCode == 13) {
     if (
-      !phraseLetters.includes(letterGuess.value) &&
-      !lettersGuessedSet.includes(letterGuess.value)
+      !phraseLetters.includes(letterGuess.value.toLowerCase()) &&
+      !phraseLetters.includes(letterGuess.value.toUpperCase()) &&
+      !lettersGuessedSet.includes(letterGuess.value.toLowerCase()) &&
+      !lettersGuessedSet.includes(letterGuess.value.toUpperCase())
     ) {
       wrong++;
       wrongText.textContent = "Wrong: " + wrong;
     }
 
-    if (!lettersGuessedSet.includes(letterGuess.value)) {
+    if (
+      !lettersGuessedSet.includes(letterGuess.value.toUpperCase()) &&
+      !lettersGuessedSet.includes(letterGuess.value.toLowerCase())
+    ) {
       lettersGuessedSet.push(letterGuess.value);
     }
     lettersGuessed.textContent = "Guessed: " + lettersGuessedSet.join(" ");
@@ -73,7 +79,7 @@ letterGuess.addEventListener("keypress", function (event) {
     }
 
     for (var j = 0; j < phraseLine.length; j++) {
-      if (phraseLine.includes(" _ ")) {
+      if (phraseLine.includes("_")) {
         gameContinue = true;
       } else {
         gameContinue = false;

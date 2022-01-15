@@ -4,7 +4,8 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(8, 160px);
+  padding: 0 10%;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
   margin-top: 20px;
   justify-content: center;
